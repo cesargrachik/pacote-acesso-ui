@@ -1,0 +1,147 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Novo Usuário</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          [(ngModel)]="pessoa.nome"
+          #nome="ngModel" required minlength="5">
+
+        <app-message [control]="nome" error="required"
+          text="Informe o nome"></app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Login</label>
+        <input pInputText type="text" name="login"
+          [(ngModel)]="pessoa.login"
+          #login="ngModel" required>
+
+        <app-message [control]="login" error="required"
+          text="Informe o Login"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>E-mail</label>
+        <input pInputText type="text" name="email"
+          [(ngModel)]="pessoa.email"
+          #email="ngModel" required>
+
+        <app-message [control]="email" error="required"
+          text="Informe o E-Mail"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Senha</label>
+        <input pInputText type="password" name="senha"
+        [(ngModel)]="pessoa.senha">
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Tempo Exp Senha</label>
+        <p-dropdown name="tempoExpSenha" placeholder="Selecione..." [autoWidth]="false"
+          [filter]="false" [options]="tempoExpiracaoSenha" [(ngModel)]="pessoa.tempo_expiracao_senha">
+        </p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Código Autorização</label>
+        <input pInputText type="text" name="CodAtuo"
+        [(ngModel)]="pessoa.cod_autorizacao">
+      </div>
+
+     
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Status Usuário</label>
+        <p-dropdown name="StatusUsuario" placeholder="Selecione..." [autoWidth]="false"
+          [filter]="false" [options]="status" [(ngModel)]="pessoa.status_usuario">
+        </p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Código Pessoa</label>
+        <input pInputText type="text" name="CodPessoa"
+        [(ngModel)]="pessoa.cod_pessoa">
+      </div>
+  
+      <div class="ui-g-12 ui-md-2 ui-fluid col-calendario">
+        <label>Data Criação</label>
+        <input pInputText type="date" name="data_criacao"
+          [(ngModel)]="pessoa.data_criacao"
+          #data_criacao="ngModel" required>
+      </div>
+           
+
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+      
+      <!--   <button pButton type="button" label="Nova" class="ui-button-info"
+          (click)="nova(f)"></button> -->
+     
+        <button pButton type="button" label="Pesquisar" 
+         routerLink="/usuarios"></button>
+      </div>
+    </div>
+  </form>
+
+
+ 
+  <div class="ui-g">
+    <div class="ui-g-6">
+        <p>Perfil Usuário</p>
+      <p-dataTable id="perfil" [value]="pessoa.usuariosPerfil" [responsive]="true"
+        emptyMessage="Nenhuma Perfil encontrada"
+        #tabela>
+
+          <p-column styleClass="col-codigo-perfil" field="idPerfil" header="Codigo"></p-column>
+          <p-column field="nome_perfil" header="Nome"></p-column>
+
+          <p-column styleClass="col-acoes">
+            <ng-template let-pes="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/usuarios', pes.idPerfil]"></a>
+              <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(pes)"></button>
+            </ng-template>
+          </p-column>
+      </p-dataTable>
+    </div>
+
+
+    <div class="ui-g">
+      <div class="ui-g-6">
+          <p>Aparelhos Usuário</p>
+        <p-dataTable id="aparelho" [value]="pessoa.usuariosAparelhos" [responsive]="true"
+          emptyMessage="Nenhuma Aparelho encontrada"
+          #tabela>
+  
+            <p-column styleClass="col-codigo-aparelho" field="id_aparelho" header="Codigo"></p-column>
+            <p-column field="descricao_aparelho" header="Nome"></p-column>
+  
+            <p-column styleClass="col-acoes">
+              <ng-template let-pes="rowData" pTemplate="body">
+                <a pButton icon="fa-pencil"
+                  pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/usuarios', pes.id_aparelho]"></a>
+                <button pButton icon="fa-trash"
+                  pTooltip="Excluir" tooltipPosition="top"
+                  (click)="confirmarExclusao(pes)"></button>
+              </ng-template>
+            </p-column>
+        </p-dataTable>
+      </div>
+
+
+
+
+</div>
