@@ -56,8 +56,8 @@ export class PessoaCadastroComponent implements OnInit {
       .then(pessoa => {
         this.pessoa = pessoa;
         this.atualizarTituloEdicao();
-        console.log(this.pessoa.usuariosPerfil);
-        console.log(this.pessoa.usuariosAparelhos);
+       // console.log(this.pessoa.usuariosPerfil);
+       // console.log(this.pessoa.usuariosAparelhos);
        })
       .catch(erro => this.errorHandler.handle(erro));
   }

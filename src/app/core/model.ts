@@ -1,12 +1,12 @@
 
 export class Perfil {
-  id_perfil: string;
-  nome_perfil: string;
+  idPerfil: string;
+  nomePerfil: string;
 }
 
 export class Aparelho {
-  id_aparelho: string;
-  descricao_aparelho: string;
+  idAparelho: string;
+  descricaoAparelho: string;
 }
 
 

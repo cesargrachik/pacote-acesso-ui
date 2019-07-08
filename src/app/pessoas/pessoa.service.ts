@@ -23,7 +23,6 @@ export class PessoaService {
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     const params = new URLSearchParams();
     const headers = new Headers();
-  
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
@@ -37,7 +36,6 @@ export class PessoaService {
       .then(response => {
         const responseJson = response.json();
         const pessoas = responseJson.content;
-        console.log(pessoas);
         const resultado = {
           pessoas,
           total: responseJson.totalElements
@@ -49,7 +47,6 @@ export class PessoaService {
 
   listarTodas(): Promise<any> {
     const headers = new Headers();
- 
     return this.http.get(this.pessoasUrl, { headers })
       .toPromise()
       .then(response => response.json().content);
@@ -66,7 +63,6 @@ export class PessoaService {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
-
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
@@ -88,7 +84,6 @@ export class PessoaService {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
-  
     pessoa.data_criacao = moment(pessoa.data_criacao,
       'YYYY-MM-DD').toDate();
 

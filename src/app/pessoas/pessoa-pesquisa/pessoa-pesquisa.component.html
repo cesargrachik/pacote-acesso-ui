@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="ui-g">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+      <div class="ui-g-12">
+        <h1>Usuários</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable id="pessoas" [value]="pessoas" [responsive]="true"
+        emptyMessage="Nenhuma pessoa encontrada"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+          <p-column field="nome" header="Nome"></p-column>
+          <p-column field="login" header="Login"></p-column>
+          <p-column field="email" header="E-mail"></p-column>
+           <p-column field="status_usuario" header="Status">
+            <ng-template let-pes="rowData" pTemplate="body">
+                <a href="javascript:;"
+                    [pTooltip]="pes.status_usuario ? 'Desativar' : 'Ativar'"
+                    tooltipPosition="top"
+                    (click)="alternarStatus(pes)">
+                  {{ pes.status_usuario ? 'Ativo' : 'Inativo' }}
+                </a>
+            </ng-template>
+          </p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template let-pes="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/usuarios', pes.id_usuario]"></a>
+              <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(pes)"></button>
+            </ng-template>
+          </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Novo Usuário" routerLink="/usuarios/nova"></a>
+    </div> 
+  </div>
+
+ 
+
+</div>

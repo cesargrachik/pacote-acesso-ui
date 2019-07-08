@@ -11,6 +11,8 @@ import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { PerfilService } from './../pessoas/perfil.service';
+import { AparelhosService } from './../pessoas/aparelhos.service';
 
 @NgModule({
   imports: [
@@ -28,6 +30,8 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
   ],
   providers: [
     PessoaService,
+    PerfilService,
+    AparelhosService,
     ErrorHandlerService,
 
     ConfirmationService,

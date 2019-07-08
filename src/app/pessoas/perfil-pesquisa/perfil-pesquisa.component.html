@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="ui-g">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+      <div class="ui-g-12">
+        <h1>Perfil de usuário</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Perfil</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable id="perfis" [value]="perfis" [responsive]="true"
+        emptyMessage="Nenhum perfil encontrado"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+          <p-column field="idPerfil" header="Codigo"></p-column>
+          <p-column field="nomePerfil" header="Perfil"></p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template let-pes="rowData" pTemplate="body">
+             <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(pes)"></button>
+            </ng-template>
+          </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Novo Perfil" routerLink="/usuarios/nova"></a>
+    </div> 
+  </div>
+
+ 
+
+</div>
+

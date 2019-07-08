@@ -11,9 +11,13 @@ import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
  
 import { SharedModule } from './../shared/shared.module';
-import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
-import { PessoasRoutingModule } from './pessoas-routing.module';
+import { PessoaRoutingModule } from './pessoa-routing.module';
+import { PerfilCadstroComponent } from './perfil-cadstro/perfil-cadstro.component';
+import { PerfilPesquisaComponent } from './perfil-pesquisa/perfil-pesquisa.component';
+import { AparelhosPesquisaComponent } from './aparelhos-pesquisa/aparelhos-pesquisa.component';
+import { AparelhosCadastroComponent } from './aparelhos-cadastro/aparelhos-cadastro.component';
 
 @NgModule({
   imports: [
@@ -28,11 +32,15 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
     DropdownModule,
     CalendarModule,
     SharedModule,
-    PessoasRoutingModule
+    PessoaRoutingModule
   ],
   declarations: [
     PessoaCadastroComponent,
-    PessoasPesquisaComponent
+    PessoaPesquisaComponent,
+    PerfilCadstroComponent,
+    PerfilPesquisaComponent,
+    AparelhosPesquisaComponent,
+    AparelhosCadastroComponent
   ],
   exports: []
 })

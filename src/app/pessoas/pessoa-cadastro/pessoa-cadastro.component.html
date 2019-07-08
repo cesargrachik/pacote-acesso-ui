@@ -22,7 +22,7 @@
         <label>Login</label>
         <input pInputText type="text" name="login"
           [(ngModel)]="pessoa.login"
-          #login="ngModel" required>
+          #login="ngModel" required  maxlength="12">
 
         <app-message [control]="login" error="required"
           text="Informe o Login"></app-message>
@@ -83,8 +83,8 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
       
-      <!--   <button pButton type="button" label="Nova" class="ui-button-info"
-          (click)="nova(f)"></button> -->
+         <button pButton type="button" label="Nova" class="ui-button-info"
+          (click)="nova(f)"></button> 
      
         <button pButton type="button" label="Pesquisar" 
          routerLink="/usuarios"></button>
@@ -102,7 +102,7 @@
         #tabela>
 
           <p-column styleClass="col-codigo-perfil" field="idPerfil" header="Codigo"></p-column>
-          <p-column field="nome_perfil" header="Nome"></p-column>
+          <p-column field="nomePerfil" header="Nome"></p-column>
 
           <p-column styleClass="col-acoes">
             <ng-template let-pes="rowData" pTemplate="body">
@@ -126,7 +126,7 @@
           #tabela>
   
             <p-column styleClass="col-codigo-aparelho" field="id_aparelho" header="Codigo"></p-column>
-            <p-column field="descricao_aparelho" header="Nome"></p-column>
+            <p-column field="descricaoAparelho" header="Nome"></p-column>
   
             <p-column styleClass="col-acoes">
               <ng-template let-pes="rowData" pTemplate="body">
