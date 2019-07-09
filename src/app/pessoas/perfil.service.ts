@@ -59,23 +59,22 @@ export class PerfilService {
   }
 
 
-  adicionar(pessoa: Perfil): Promise<Perfil> {
+  adicionar(perfil: Perfil): Promise<Perfil> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
-
-      return this.http.post(this.perfilUrl, JSON.stringify(Perfil), { headers })
+     return this.http.post(this.perfilUrl, JSON.stringify(perfil), { headers })
       .toPromise()
       .then(response => response.json());
   }
 
-  atualizar(pessoa: Perfil): Promise<Perfil> {
+  atualizar(perfil: Perfil): Promise<Perfil> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.perfilUrl}/${pessoa.idPerfil}`,
-        JSON.stringify(pessoa), { headers })
+    return this.http.put(`${this.perfilUrl}/${perfil.idPerfil}`,
+        JSON.stringify(perfil), { headers })
       .toPromise()
       .then(response => response.json() as Perfil);
   }

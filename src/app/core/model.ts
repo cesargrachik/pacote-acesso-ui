@@ -1,12 +1,18 @@
 
 export class Perfil {
-  idPerfil: string;
+  idPerfil: number;
   nomePerfil: string;
-}
+
+   constructor(idPerfil?: number, nomePerfil?: string) {
+     this.idPerfil = idPerfil;
+     this.nomePerfil = nomePerfil;
+   }
+  }
 
 export class Aparelho {
   idAparelho: string;
   descricaoAparelho: string;
+  codigo_aparelho: string;
 }
 
 

@@ -17,7 +17,7 @@ export class AparelhosPesquisaComponent implements OnInit {
 
   totalRegistros = 0;
   filtro = new AparelhosFiltro();
-  perfis = [];
+  aparelhos = [];
   @ViewChild('tabela') grid;
 
   constructor(
@@ -38,8 +38,7 @@ export class AparelhosPesquisaComponent implements OnInit {
     this.aparelhosService.pesquisar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
-        this.perfis = resultado.perfis;
-        // console.log(this.perfis);
+        this.aparelhos = resultado.aparelhos;
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -49,18 +48,17 @@ export class AparelhosPesquisaComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
-  confirmarExclusao(perfil: any) {
+  confirmarExclusao(aparelhos: any) {
     this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
       accept: () => {
-        this.excluir(perfil);
+        this.excluir(aparelhos);
       }
     });
   }
 
-  excluir(perfil: any) {
-    console.log(perfil)
-    this.aparelhosService.excluir(perfil.idPerfil)
+  excluir(aparelhos: any) {
+    this.aparelhosService.excluir(aparelhos.id_aparelho)
       .then(() => {
         if (this.grid.first === 0) {
           this.pesquisar();

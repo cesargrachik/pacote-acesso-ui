@@ -1,3 +1,49 @@
-<p>
-  aparelhos-cadastro works!
-</p>
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Novo Aparelho Usuário</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Aparelho</label>
+        <input pInputText type="text" name="descricaoAparelho"
+          [(ngModel)]="aparelho.descricaoAparelho"
+          #descricaoAparelho="ngModel" required minlength="5" maxlength="15">
+
+        <app-message [control]="descricaoAparelho" error="required"
+          text="Informe o nome do Aparelho"></app-message>
+        <app-message [control]="descricaoAparelho" error="minlength"
+          text="Mínimo de {{ descricaoAparelho.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Código Aparelho</label>
+        <input pInputText type="text" name="codigo_aparelho"
+          [(ngModel)]="aparelho.codigo_aparelho"
+          #CodigoAparelho="ngModel" required  maxlength="100">
+
+        <app-message [control]="CodigoAparelho" error="required"
+          text="Informe o Código do Aparelho"></app-message>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+      
+         <button pButton type="button" label="Novo" class="ui-button-info"
+          (click)="nova(f)"></button> 
+     
+        <button pButton type="button" label="Pesquisar" 
+         routerLink="/aparelhos"></button>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+
+
+
+
+

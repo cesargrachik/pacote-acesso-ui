@@ -1,12 +1,10 @@
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
-
 import 'rxjs/add/operator/toPromise';
-
 import { Aparelho } from './../core/model';
 
 export class AparelhosFiltro {
-  nomePerfil: string;
+  descricaoAparelho: string;
   pagina = 0;
   itensPorPagina = 5;
 }
@@ -25,18 +23,17 @@ export class AparelhosService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    if (filtro.nomePerfil) {
-      params.set('nomePerfil', filtro.nomePerfil);
+    if (filtro.descricaoAparelho) {
+      params.set('descricaoAparelho', filtro.descricaoAparelho);
     }
 
     return this.http.get(`${this.aparelhosUrl}`, { headers, search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
-        const perfis = responseJson.content;
-        console.log(perfis);
+        const aparelhos = responseJson.content;
         const resultado = {
-          perfis,
+          aparelhos,
           total: responseJson.totalElements
           };
 
@@ -59,32 +56,27 @@ export class AparelhosService {
   }
 
 
-  adicionar(pessoa: Aparelho): Promise<Aparelho> {
+  adicionar(aparelho: Aparelho): Promise<Aparelho> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
 
-      return this.http.post(this.aparelhosUrl, JSON.stringify(Aparelho), { headers })
+      return this.http.post(this.aparelhosUrl, JSON.stringify(aparelho), { headers })
       .toPromise()
       .then(response => response.json());
   }
 
-  atualizar(pessoa: Aparelho): Promise<Aparelho> {
+  atualizar(aparelho: Aparelho): Promise<Aparelho> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.aparelhosUrl}/${pessoa.idAparelho}`,
-        JSON.stringify(pessoa), { headers })
+    return this.http.put(`${this.aparelhosUrl}/${aparelho.idAparelho}`,
+        JSON.stringify(aparelho), { headers })
       .toPromise()
       .then(response => response.json() as Aparelho);
   }
 
   buscarPorCodigo(codigo: number): Promise<Aparelho> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.http.get(`${this.aparelhosUrl}/${codigo}`, { headers })
+    return this.http.get(`${this.aparelhosUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Aparelho);
   }

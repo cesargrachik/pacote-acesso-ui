@@ -7,7 +7,8 @@ import { ToastyService } from 'ng2-toasty';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { PessoaService } from './../pessoa.service';
-import { Pessoa } from './../../core/model';
+import { Pessoa , Perfil, Aparelho } from './../../core/model';
+import { ConfirmationService } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -17,6 +18,20 @@ import { Pessoa } from './../../core/model';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  exbindoFormularioPerfil = false;
+  exbindoFormularioAparelho = false;
+  perfil: Perfil;
+  aparelho: Aparelho;
+
+  perfilCombo =  [ { label : 'Administrador', value: '1'},
+                   { label : 'Gerente', value: '2'},
+                   { label : 'Vendedor', value: '3'},
+                   { label : 'Vendedor Externo', value: '4'},
+                   { label : 'Vendedor Peças', value: '5'}   ];
+
+  aparelhoCombo =  [ { label : 'NoteBook', value: '1'},
+                   { label : 'Monitor', value: '2'},
+                   { label : 'HD externo', value: '3'} ];
 
   status =  [{ label : 'Ativo', value: 'A'},
              { label : 'Inativo', value: 'I'}];
@@ -34,7 +49,8 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private confirmation: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -74,7 +90,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.adicionar(this.pessoa)
       .then(pessoaAdicionada => {
         this.toasty.success('Pessoa adicionada com sucesso!');
-        this.router.navigate(['/usuarios']);   
+        this.router.navigate(['/usuarios']);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -102,6 +118,42 @@ export class PessoaCadastroComponent implements OnInit {
 
   atualizarTituloEdicao() {
     this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
+  }
+
+  prepararNovoPerfil() {
+    this.exbindoFormularioPerfil = true;
+    this.perfil = new Perfil();
+  }
+
+
+  confirmarPerfil(frm: FormControl) {
+    console.log('confirmarPerfil');
+    this.pessoa.usuariosPerfil.push(this.clonarPerfil(this.perfil));
+    this.exbindoFormularioPerfil = false;
+    frm.reset();
+  }
+
+  clonarPerfil(perfil: Perfil): Perfil {
+     console.log('clonarPerfil');
+     console.log(perfil.idPerfil);
+     console.log(perfil.nomePerfil);
+     return new Perfil(perfil.idPerfil , perfil.nomePerfil);
+  // return new Perfil(21 , 'Teste de Deus');
+  }
+
+  prepararNovoAparelho() {
+    this.exbindoFormularioAparelho = true;
+    this.aparelho = new Aparelho();
+  }
+
+
+  confirmarExclusao(pessoa: any) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.toasty.success('Usuário sem permissão para excluir!');
+      }
+    });
   }
 
 }

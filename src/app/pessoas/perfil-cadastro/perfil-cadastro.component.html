@@ -1,0 +1,38 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Novo Perfil Usuário</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Perfil</label>
+        <input pInputText type="text" name="nomePerfil"
+          [(ngModel)]="perfil.nomePerfil"
+          #nomePerfil="ngModel" required minlength="5">
+
+        <app-message [control]="nomePerfil" error="required"
+          text="Informe o nome do Perfil"></app-message>
+        <app-message [control]="nomePerfil" error="minlength"
+          text="Mínimo de {{ nomePerfil.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+      
+         <button pButton type="button" label="Novo" class="ui-button-info"
+          (click)="nova(f)"></button> 
+     
+        <button pButton type="button" label="Pesquisar" 
+         routerLink="/perfil"></button>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+
+
+
+

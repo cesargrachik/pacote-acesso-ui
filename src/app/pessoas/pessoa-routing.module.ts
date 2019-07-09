@@ -5,13 +5,17 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { PerfilPesquisaComponent } from './perfil-pesquisa/perfil-pesquisa.component';
 import { AparelhosPesquisaComponent } from './aparelhos-pesquisa/aparelhos-pesquisa.component';
+import { PerfilCadastroComponent } from './perfil-cadastro/perfil-cadastro.component';
+import { AparelhosCadastroComponent } from './aparelhos-cadastro/aparelhos-cadastro.component';
 
 const routes: Routes = [
   { path: 'usuarios', component: PessoaPesquisaComponent },
   { path: 'usuarios/nova', component: PessoaCadastroComponent },
   { path: 'usuarios/:codigo', component: PessoaCadastroComponent },
   { path: 'perfil', component: PerfilPesquisaComponent },
-  { path: 'aparelhos', component: AparelhosPesquisaComponent }
+  { path: 'perfil/nova', component: PerfilCadastroComponent },
+  { path: 'aparelhos', component: AparelhosPesquisaComponent },
+  { path: 'aparelhos/nova', component: AparelhosCadastroComponent }
 ];
 
 @NgModule({

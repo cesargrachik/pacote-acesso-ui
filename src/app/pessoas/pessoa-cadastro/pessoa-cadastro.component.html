@@ -88,6 +88,13 @@
      
         <button pButton type="button" label="Pesquisar" 
          routerLink="/usuarios"></button>
+
+         <button pButton label="Novo Perfil" icon="fa-plus" type="button"
+         class="ui-button-secondary" (click)="prepararNovoPerfil()"></button>
+
+         <button pButton label="Novo Aparelho" icon="fa-plus" type="button"
+         class="ui-button-secondary" (click)="prepararNovoAparelho()"></button>
+
       </div>
     </div>
   </form>
@@ -106,9 +113,6 @@
 
           <p-column styleClass="col-acoes">
             <ng-template let-pes="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil"
-                pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/usuarios', pes.idPerfil]"></a>
               <button pButton icon="fa-trash"
                 pTooltip="Excluir" tooltipPosition="top"
                 (click)="confirmarExclusao(pes)"></button>
@@ -122,7 +126,7 @@
       <div class="ui-g-6">
           <p>Aparelhos Usuário</p>
         <p-dataTable id="aparelho" [value]="pessoa.usuariosAparelhos" [responsive]="true"
-          emptyMessage="Nenhuma Aparelho encontrada"
+          emptyMessage="Nenhuma Aparelho encontrado"
           #tabela>
   
             <p-column styleClass="col-codigo-aparelho" field="id_aparelho" header="Codigo"></p-column>
@@ -130,18 +134,51 @@
   
             <p-column styleClass="col-acoes">
               <ng-template let-pes="rowData" pTemplate="body">
-                <a pButton icon="fa-pencil"
-                  pTooltip="Editar" tooltipPosition="top"
-                  [routerLink]="['/usuarios', pes.id_aparelho]"></a>
-                <button pButton icon="fa-trash"
+               <button pButton icon="fa-trash"
                   pTooltip="Excluir" tooltipPosition="top"
                   (click)="confirmarExclusao(pes)"></button>
               </ng-template>
             </p-column>
         </p-dataTable>
       </div>
-
-
-
-
 </div>
+
+
+
+<p-dialog header="Novo Perfil" [(visible)]="exbindoFormularioPerfil"
+  modal="modal" *ngIf="perfil">
+  <form #frmContato="ngForm" (ngSubmit)="confirmarPerfil(frmContato)">
+  
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+        <label>Perfil</label>
+        <p-dropdown name="perfildrp" placeholder="Selecione..." [autoWidth]="false"
+          [filter]="false" [options]="perfilCombo" [(ngModel)]="perfil.idPerfil" >
+        </p-dropdown>
+    </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmContato.invalid"></button>
+      </div>
+  </form>
+</p-dialog>
+
+
+<p-dialog header="Novo Aparelho" [(visible)]="exbindoFormularioAparelho"
+  modal="modal" *ngIf="aparelho">
+  <form #frmContato="ngForm" (ngSubmit)="confirmarAparelho(frmContato)">
+  
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+        <label>Aparelho</label>
+        <p-dropdown name="aparelhodrp" placeholder="Selecione..." [autoWidth]="false"
+          [filter]="false" [options]="aparelhoCombo" [(ngModel)]="aparelho.usuariosAparelhos">
+        </p-dropdown>
+    </div>
+
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmContato.invalid"></button>
+      </div>
+  </form>
+</p-dialog>

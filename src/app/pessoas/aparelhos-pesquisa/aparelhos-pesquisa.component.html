@@ -9,7 +9,7 @@
 
       <div class="ui-g-12 ui-fluid">
         <label>Aparelho</label>
-        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+        <input pInputText type="text" name="descricaoAparelho" [(ngModel)]="filtro.descricaoAparelho">
       </div>
 
       <div class="ui-g-12">
@@ -22,7 +22,7 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-dataTable id="aparelho" [value]="perfis" [responsive]="true"
+      <p-dataTable id="aparelhos" [value]="aparelhos" [responsive]="true"
         emptyMessage="Nenhum aparelho encontrado"
         [paginator]="true" [rows]="filtro.itensPorPagina"
         [lazy]="true" [totalRecords]="totalRegistros"
@@ -41,7 +41,7 @@
     </div>
 
     <div class="ui-g-12">
-      <a pButton label="Novo Perfil" routerLink="/usuarios/nova"></a>
+      <a pButton label="Novo Aparelho" routerLink="/aparelhos/nova"></a>
     </div> 
   </div>
 

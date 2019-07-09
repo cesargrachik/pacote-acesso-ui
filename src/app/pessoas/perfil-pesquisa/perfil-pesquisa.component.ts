@@ -38,7 +38,6 @@ export class PerfilPesquisaComponent implements OnInit {
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.perfis = resultado.perfis;
-        // console.log(this.perfis);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

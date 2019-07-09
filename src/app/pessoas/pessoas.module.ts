@@ -9,13 +9,14 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
- 
+import { DialogModule } from 'primeng/components/dialog/dialog';
+
 import { SharedModule } from './../shared/shared.module';
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoaRoutingModule } from './pessoa-routing.module';
-import { PerfilCadstroComponent } from './perfil-cadstro/perfil-cadstro.component';
 import { PerfilPesquisaComponent } from './perfil-pesquisa/perfil-pesquisa.component';
+import { PerfilCadastroComponent } from './perfil-cadastro/perfil-cadastro.component';
 import { AparelhosPesquisaComponent } from './aparelhos-pesquisa/aparelhos-pesquisa.component';
 import { AparelhosCadastroComponent } from './aparelhos-cadastro/aparelhos-cadastro.component';
 
@@ -31,13 +32,14 @@ import { AparelhosCadastroComponent } from './aparelhos-cadastro/aparelhos-cadas
     InputMaskModule,
     DropdownModule,
     CalendarModule,
+    DialogModule,
     SharedModule,
     PessoaRoutingModule
   ],
   declarations: [
     PessoaCadastroComponent,
     PessoaPesquisaComponent,
-    PerfilCadstroComponent,
+    PerfilCadastroComponent,
     PerfilPesquisaComponent,
     AparelhosPesquisaComponent,
     AparelhosCadastroComponent

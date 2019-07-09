@@ -61,7 +61,6 @@ export class PessoaService {
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
@@ -70,7 +69,6 @@ export class PessoaService {
 
   adicionar(pessoa: Pessoa): Promise<Pessoa> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
 
     pessoa.data_criacao = moment(pessoa.data_criacao,
@@ -82,7 +80,6 @@ export class PessoaService {
 
   atualizar(pessoa: Pessoa): Promise<Pessoa> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
     pessoa.data_criacao = moment(pessoa.data_criacao,
       'YYYY-MM-DD').toDate();
@@ -94,10 +91,7 @@ export class PessoaService {
   }
 
   buscarPorCodigo(codigo: number): Promise<Pessoa> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.http.get(`${this.pessoasUrl}/${codigo}`, { headers })
+    return this.http.get(`${this.pessoasUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Pessoa);
   }
