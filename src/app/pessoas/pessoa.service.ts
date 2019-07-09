@@ -1,11 +1,9 @@
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
-
 import 'rxjs/add/operator/toPromise';
-
-import { Pessoa } from './../core/model';
-
+import { Pessoa, Perfil } from './../core/model';
 import * as moment from 'moment';
+
 
 export class PessoaFiltro {
   nome: string;
@@ -102,5 +100,6 @@ export class PessoaService {
         'YYYY-MM-DD').toDate();
     }
   }
+
 
 }

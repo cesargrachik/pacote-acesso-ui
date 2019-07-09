@@ -147,7 +147,7 @@
 
 <p-dialog header="Novo Perfil" [(visible)]="exbindoFormularioPerfil"
   modal="modal" *ngIf="perfil">
-  <form #frmContato="ngForm" (ngSubmit)="confirmarPerfil(frmContato)">
+  <form #frmPerfil="ngForm" (ngSubmit)="confirmarPerfil(frmPerfil)">
   
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>
@@ -158,7 +158,7 @@
     </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmContato.invalid"></button>
+        <button pButton type="submit" label="Confirmar" [disabled]="frmPerfil.invalid"></button>
       </div>
   </form>
 </p-dialog>
@@ -166,7 +166,7 @@
 
 <p-dialog header="Novo Aparelho" [(visible)]="exbindoFormularioAparelho"
   modal="modal" *ngIf="aparelho">
-  <form #frmContato="ngForm" (ngSubmit)="confirmarAparelho(frmContato)">
+  <form #frmAparelho="ngForm" (ngSubmit)="confirmarAparelho(frmAparelho)">
   
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>
@@ -178,7 +178,7 @@
 
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmContato.invalid"></button>
+        <button pButton type="submit" label="Confirmar" [disabled]="frmAparelho.invalid"></button>
       </div>
   </form>
 </p-dialog>

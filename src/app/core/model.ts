@@ -7,12 +7,17 @@ export class Perfil {
      this.idPerfil = idPerfil;
      this.nomePerfil = nomePerfil;
    }
-  }
+}
 
 export class Aparelho {
-  idAparelho: string;
+  idAparelho: number;
   descricaoAparelho: string;
   codigo_aparelho: string;
+
+  constructor(idAparelho?: number, descricaoAparelho?: string) {
+    this.idAparelho = idAparelho;
+    this.descricaoAparelho = descricaoAparelho;
+  }
 }
 
 

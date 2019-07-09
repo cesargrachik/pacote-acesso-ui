@@ -1,10 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
 import { ToastyService } from 'ng2-toasty';
-
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { PessoaService } from './../pessoa.service';
 import { Pessoa , Perfil, Aparelho } from './../../core/model';
@@ -23,15 +21,20 @@ export class PessoaCadastroComponent implements OnInit {
   perfil: Perfil;
   aparelho: Aparelho;
 
+
   perfilCombo =  [ { label : 'Administrador', value: '1'},
                    { label : 'Gerente', value: '2'},
                    { label : 'Vendedor', value: '3'},
                    { label : 'Vendedor Externo', value: '4'},
-                   { label : 'Vendedor Peças', value: '5'}   ];
+                   { label : 'Comprador', value: '5'},
+                   { label : 'Auxiliar Administrativo', value: '6'}   ];
 
   aparelhoCombo =  [ { label : 'NoteBook', value: '1'},
                    { label : 'Monitor', value: '2'},
-                   { label : 'HD externo', value: '3'} ];
+                   { label : 'HD externo', value: '3'},
+                   { label : 'Cabo USB', value: '4'},
+                   { label : 'Teclado', value: '5'},
+                   { label : 'Mouse', value: '6'}  ];
 
   status =  [{ label : 'Ativo', value: 'A'},
              { label : 'Inativo', value: 'I'}];
@@ -57,7 +60,6 @@ export class PessoaCadastroComponent implements OnInit {
     const codigoPessoa = this.route.snapshot.params['codigo'];
 
     this.title.setTitle('Novo Usuário');
-
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
@@ -72,8 +74,6 @@ export class PessoaCadastroComponent implements OnInit {
       .then(pessoa => {
         this.pessoa = pessoa;
         this.atualizarTituloEdicao();
-       // console.log(this.pessoa.usuariosPerfil);
-       // console.log(this.pessoa.usuariosAparelhos);
        })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -127,23 +127,28 @@ export class PessoaCadastroComponent implements OnInit {
 
 
   confirmarPerfil(frm: FormControl) {
-    console.log('confirmarPerfil');
     this.pessoa.usuariosPerfil.push(this.clonarPerfil(this.perfil));
     this.exbindoFormularioPerfil = false;
     frm.reset();
   }
 
   clonarPerfil(perfil: Perfil): Perfil {
-     console.log('clonarPerfil');
-     console.log(perfil.idPerfil);
-     console.log(perfil.nomePerfil);
      return new Perfil(perfil.idPerfil , perfil.nomePerfil);
-  // return new Perfil(21 , 'Teste de Deus');
   }
 
   prepararNovoAparelho() {
     this.exbindoFormularioAparelho = true;
     this.aparelho = new Aparelho();
+  }
+
+  confirmarAparelho(frm: FormControl) {
+    this.pessoa.usuariosAparelhos.push(this.clonarAparelho(this.aparelho));
+    this.exbindoFormularioPerfil = false;
+    frm.reset();
+  }
+
+  clonarAparelho(aparelho: Aparelho): Aparelho {
+     return new Aparelho(aparelho.idAparelho , aparelho.descricaoAparelho);
   }
 
 
