@@ -143,7 +143,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   confirmarAparelho(frm: FormControl) {
     this.pessoa.usuariosAparelhos.push(this.clonarAparelho(this.aparelho));
-    this.exbindoFormularioPerfil = false;
+    this.exbindoFormularioAparelho = false;
     frm.reset();
   }
 
